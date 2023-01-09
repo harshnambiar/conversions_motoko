@@ -3,6 +3,7 @@ import Nat "mo:base/Nat";
 import Text "mo:base/Text";
 import Float "mo:base/Float";
 import Debug "mo:base/Debug";
+import Prim "mo:⛔";
 
 actor {
     public func floatToNat(f: Float): async ?Nat{
@@ -52,5 +53,25 @@ actor {
             };
         };
         return ?result;
+    };
+
+    public func natToNat32(n: Nat): async ?Nat32 {
+        if (n >= 2**32){
+            return null;
+        }
+        else {
+            return ?Prim.intToNat32Wrap(n);
+        };
+        return null;
+    };
+
+    public func natToNat8(n: Nat): async ?Nat8 {
+        if (n >= 2**8){
+            return null;
+        }
+        else {
+            return ?Prim.intToNat8Wrap(n);
+        };
+        return null;
     };
 };
